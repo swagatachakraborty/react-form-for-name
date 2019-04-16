@@ -20,7 +20,7 @@ class App extends Component {
     })
       .then(res => {
         if (res.status === 404) return '';
-        res.text();
+        return res.text();
       })
       .then(res => this.setState({ display: res }));
   }
