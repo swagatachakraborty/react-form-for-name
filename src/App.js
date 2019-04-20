@@ -6,7 +6,8 @@ class App extends Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.state = {
-      display: ''
+      display: '',
+      visitors: 0
     };
   }
 
@@ -20,9 +21,11 @@ class App extends Component {
     })
       .then(res => {
         if (res.status === 404) return '';
-        return res.text();
+        return res.json();
       })
-      .then(res => this.setState({ display: res }));
+      .then(({ display, visitors }) => {
+        this.setState({ display: display, visitors: visitors });
+      });
   }
 
   render() {
@@ -38,6 +41,8 @@ class App extends Component {
           <h2>Output :</h2>
           <div className="display">{this.state.display}</div>
         </div>
+
+        <div>{this.state.visitors}</div>
       </main>
     );
   }
